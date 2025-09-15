@@ -11,16 +11,17 @@ const config: DocsThemeConfig = {
   // project: { link: 'https://example.com/repo' },
   // docsRepositoryBase: 'https://example.com/repo/tree/main/docs',
   footer: {
-    text: 'JumpServer Whitepaper — Nextra'
+    content: 'JumpServer Whitepaper — Nextra'
   },
   sidebar: {
     defaultMenuCollapseLevel: 1
   },
-  useNextSeoProps() {
-    return {
-      titleTemplate: '%s — Whitepaper'
-    }
-  }
+  head: (
+    <>
+      <title>JumpServer Whitepaper</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </>
+  )
 }
 
 export default config
