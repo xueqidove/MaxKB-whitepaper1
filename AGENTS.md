@@ -1,42 +1,37 @@
 # Repository Guidelines
 
 ## Project Structure & Module Organization
-- Root contains the primary content: `JumpServer-whitepaper.md` (source) and `index.html` (rendered site).
-- Assets live under `images/` (generated from embedded images in the Markdown).
-- Utility script: `extract_images.py` (extracts base64 images from the Markdown to `images/`).
-- Other: `CNAME` for GitHub Pages custom domain, `LICENSE`, `README.md`.
+- Root contains `JumpServer-whitepaper.html` and its asset folder `JumpServer-whitepaper.fld/` (images, header, theme files). 
+- Keep relative paths intact: the HTML references assets by filename inside `.fld`.
+- If adding assets, place them in `JumpServer-whitepaper.fld/` and reference with relative paths.
 
 ## Build, Test, and Development Commands
-- Extract images from Markdown:
-  - `python3 extract_images.py` — saves decoded images into `images/` and logs counts.
-- Preview locally:
-  - `python3 -m http.server 8000` then open `http://localhost:8000/index.html`.
-- Regenerate assets after editing `JumpServer-whitepaper.md`:
-  - Re-run `python3 extract_images.py` and verify `images/` updates.
+- View locally: `open JumpServer-whitepaper.html` (macOS) or double‑click in a file browser.
+- Optional local server (helps with some browser policies): `python3 -m http.server` then open `http://localhost:8000/JumpServer-whitepaper.html`.
+- No build step; this is a static export.
 
 ## Coding Style & Naming Conventions
-- Python (`extract_images.py`):
-  - Python 3.8+; PEP 8; 4-space indentation; snake_case for variables/functions.
-  - Keep scripts stateless and idempotent; avoid hardcoding paths beyond project root.
-- HTML/CSS (`index.html`):
-  - Two-space indentation; semantic tags where possible; descriptive class names.
-- Assets:
-  - Images generated as `images/<sanitized-alt>.<ext>`; prefer meaningful alt text in Markdown.
+- HTML: keep semantic tags where possible; avoid inline styles unless necessary for fidelity.
+- Assets: follow existing pattern `imageNNN.(jpg|png)` to keep ordering clear (e.g., `image063.jpg`).
+- Indentation: 2 spaces for HTML; wrap lines at ~120 chars.
+- Do not rename or move `JumpServer-whitepaper.html` or the `.fld` directory.
 
 ## Testing Guidelines
-- Manual checks:
-  - Run `python3 extract_images.py` and confirm the reported image count matches expectations.
-  - Open `index.html` locally; verify images render and links work.
-- Optional validation:
-  - Validate HTML via an online validator when making structural changes.
+- Visual check: open the HTML and verify all images render and links work.
+- Links: ensure internal anchors resolve; use relative paths only.
+- Accessibility spot check: provide alt text for new images where feasible.
+- If large edits: test in at least two browsers (e.g., Safari/Chrome).
 
 ## Commit & Pull Request Guidelines
-- Commit messages: prefer Conventional Commits (e.g., `feat: ...`, `fix: ...`, `perf: ...`, `docs: ...`).
-- Scope small, atomic commits; explain “why” in the body if non-obvious.
-- Pull Requests should include:
-  - Summary of changes, screenshots for visual changes, and any manual test notes.
-  - Reference related issues (e.g., `Closes #123`).
+- Commit messages: use concise prefixes like `docs:`, `assets:`, `fix:` (e.g., `docs: update section 3 wording`).
+- One logical change per commit; keep diffs focused on content you touched.
+- PRs should include: short description, before/after screenshots for visual changes, and any manual test notes.
 
-## Security & Configuration Tips
-- Do not commit secrets; this site is static. Review diffs for large/binary additions.
-- `CNAME` config must remain at repo root for Pages; update only when the domain changes.
+## Security & Maintenance Notes
+- Do not embed secrets or tracking scripts.
+- Keep external dependencies out of the repo; prefer self‑contained assets inside `.fld`.
+- Large images: compress before adding to keep repo small.
+
+## Agent-Specific Instructions
+- When editing files, preserve file names and relative links in `JumpServer-whitepaper.fld/`.
+- Avoid restructuring; prioritize minimal diffs to maintain link integrity.
