@@ -1,2 +1,2 @@
 # whitepaper.github.io
-JumpServer whitepaper
+MaxKB whitepaper
