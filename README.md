@@ -1,2 +1,2 @@
-# whitepaper.github.io
+# whitepaper
 MaxKB whitepaper
